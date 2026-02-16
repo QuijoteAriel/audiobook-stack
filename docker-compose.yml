@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  # DOWNLOADER EXCLUSIVO PARA MAMÁ
+  transmission-libros:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission_libros
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Argentina/Buenos_Aires # Ajusta a tu zona horaria
+    volumes:
+      - /home/raspin/transmission_libros/config:/config
+      - /home/raspin/audiolibros:/downloads # Todo lo que baje aquí, va a la carpeta de libros
+    ports:
+      - 9092:9091 # Puerto 9092 para la interfaz web (el actual es 9091)
+      - 51414:51413 # Puertos de datos distintos para no chocar
+      - 51414:51413/udp
+    restart: unless-stopped
+
+  # SERVIDOR PARA LA TV LG
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin_audiobooks
+    user: 1000:1000
+    network_mode: "host" 
+    volumes:
+      - /home/raspin/jellyfin/config:/config
+      - /home/raspin/jellyfin/cache:/cache
+      - /home/raspin/audiolibros:/data/audiobooks:ro
+    restart: unless-stopped
+
+  # GESTOR DE PORTADAS Y CAPÍTULOS (Opcional, pero recomendado para el orden)
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    ports:
+      - 13378:80
+    volumes:
+      - /home/raspin/audiolibros:/audiobooks
+      - /home/raspin/audiobookshelf/config:/config
+      - /home/raspin/audiobookshelf/metadata:/metadata
+    restart: unless-stopped
