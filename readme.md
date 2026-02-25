@@ -14,7 +14,7 @@ Persistencia de lectura: El sistema recuerda exactamente dónde te quedaste en c
 El proyecto se organiza en /home/raspin/ para separar la configuración de los archivos multimedia:
 ```text
 Plaintext
-/home/raspin/
+/home/user/
 ├── audiobook-stack/          # Este repositorio (Docker Compose)
 ├── audiolibros/              # Los archivos MP3/M4B finales
 ├── jellyfin/                 # Configuración de Jellyfin
