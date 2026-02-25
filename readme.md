@@ -12,7 +12,7 @@ Persistencia de lectura: El sistema recuerda exactamente dónde te quedaste en c
 
 🛠️ Estructura de Carpetas
 El proyecto se organiza en /home/raspin/ para separar la configuración de los archivos multimedia:
-
+```text
 Plaintext
 /home/raspin/
 ├── audiobook-stack/          # Este repositorio (Docker Compose)
@@ -20,6 +20,7 @@ Plaintext
 ├── jellyfin/                 # Configuración de Jellyfin
 ├── audiobookshelf/           # Configuración de Audiobookshelf
 └── transmission_libros/      # Configuración del descargador
+```
 📦 Instalación
 Preparar el sistema:
 
